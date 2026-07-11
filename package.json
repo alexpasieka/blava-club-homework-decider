@@ -1,0 +1,31 @@
+{
+  "name": "blava-club-homework-decider",
+  "version": "1.0.0",
+  "description": "Decides the homework for the following week of Blava Club",
+  "homepage": "https://github.com/alexpasieka/blava-club-homework-decider#readme",
+  "bugs": {
+    "url": "https://github.com/alexpasieka/blava-club-homework-decider/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexpasieka/blava-club-homework-decider.git"
+  },
+  "license": "ISC",
+  "author": "Alex Pasieka",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.0",
+    "@types/papaparse": "^5.5.2",
+    "ts-loader": "^9.6.2",
+    "typescript": "^6.0.3",
+    "webpack": "^5.108.4",
+    "webpack-cli": "^7.2.1"
+  },
+  "dependencies": {
+    "papaparse": "^5.5.4"
+  }
+}

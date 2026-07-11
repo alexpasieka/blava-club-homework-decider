@@ -1,0 +1,42 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #E8E8E8;
+    background-color: #424242;
+}
+
+h1 {
+    font-size: 5em;
+    display: flex;
+    justify-content: center;
+}
+
+.member-name {
+    font-size: 3em;
+}
+
+.homework-inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+#homework-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+}
+
+#homework-options {
+    display: flex;
+    gap: 20px;
+}
+
+#homework-options > div {
+    width: 100%;
+    min-width: 400px;
+}
+
+.member-label {
+    text-align: center;
+}
