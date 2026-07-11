@@ -3,8 +3,6 @@ name: NodeJS with Webpack
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   build:
@@ -26,3 +24,26 @@ jobs:
       run: |
         npm install
         npx webpack
+  
+  deploy:
+      needs: build
+  
+      runs-on: ubuntu-latest
+  
+      environment:
+        name: github-pages
+        url: ${{ steps.deployment.outputs.page_url }}
+  
+      permissions:
+        pages: write
+        id-token: write
+  
+      steps:
+        - uses: actions/configure-pages@v5
+
+        - uses: actions/upload-pages-artifact@v3
+          with:
+            path: ./public
+        
+        - id: deployment
+          uses: actions/deploy-pages@v4
