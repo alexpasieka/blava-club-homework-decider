@@ -29,6 +29,7 @@ h1 {
 
 #homework-options {
     display: flex;
+    flex-direction: column;
     gap: 20px;
 }
 
