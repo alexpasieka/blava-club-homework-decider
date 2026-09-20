@@ -2,5 +2,7 @@ export const MEMBER_NAMES = [
     'Alex',
     'Jordyn',
     'Kam',
-    'Leo'
+    'Leo',
+    'Dennis',
+    'Zuzu'
 ] as const;
