@@ -13,6 +13,7 @@ async function init(): Promise<void> {
     }).data;
     const members = calculateMemberData(homeworkHistory);
 
+    let probabilityAcc = 0;
     members.forEach(member => {
         const homeworkOptions = document.getElementById('homework-options');
         if (homeworkOptions) {
@@ -20,7 +21,7 @@ async function init(): Promise<void> {
                 <div>
                     <div class="member-label" id="${member.name}">
                         <span class="member-name">${member.name}</span>
-                        <span>(${(member.probability * 100).toFixed(2)}%)</span>
+                        <span>(${(member.probability * 100).toFixed(2)}%) (${probabilityAcc}-${(probabilityAcc + member.probability * 100).toFixed(2)})</span>
                     </div>
 
                     <div class="homework-inputs">
@@ -30,6 +31,7 @@ async function init(): Promise<void> {
                 </div>
             `;
         }
+        probabilityAcc += Number((member.probability * 100).toFixed(2));
     });
 
     const homeworkForm = document.getElementById('homework-form');
@@ -75,6 +77,9 @@ function decideHomework(members: MemberData[]): void {
 
 function chooseMember(members: MemberData[]): MemberData {
     let random = Math.random();
+
+    const randomNumberLabel = document.getElementById(`random-number`);
+    if (randomNumberLabel) randomNumberLabel.innerHTML = random.toString();
 
     for (let i = 0; i < members.length; i++) {
         if (random < members[i].probability) {

@@ -41,3 +41,9 @@ h1 {
 .member-label {
     text-align: center;
 }
+
+#random-number-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
