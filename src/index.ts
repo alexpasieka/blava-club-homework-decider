@@ -24,10 +24,8 @@ async function init(): Promise<void> {
                     </div>
 
                     <div class="homework-inputs">
-                        <label id="${member.name}-homework-1" for="${member.name}-homework-1">Homework Idea 1:</label>
-                        <input name="${member.name}-homework-1" type="text">
-                        <label id="${member.name}-homework-2" for="${member.name}-homework-2">Homework Idea 2:</label>
-                        <input name="${member.name}-homework-2" type="text">
+                        <label id="${member.name}-homework" for="${member.name}-homework">Homework Idea:</label>
+                        <input name="${member.name}-homework" type="text">
                     </div>
                 </div>
             `;
@@ -71,8 +69,7 @@ function calculateMemberData(homeworkHistory: HomeworkRow[]): MemberData[] {
 
 function decideHomework(members: MemberData[]): void {
     const chosenMember = chooseMember(members);
-    const chosenHomework = Math.floor(Math.random() * 2) + 1;
-    updateUI(chosenMember, chosenHomework);
+    updateUI(chosenMember);
     // updateHistory();
 }
 
@@ -89,11 +86,11 @@ function chooseMember(members: MemberData[]): MemberData {
     throw new Error('Failed to choose a member.');
 }
 
-function updateUI(chosenMember: MemberData, chosenHomework: number): void {
+function updateUI(chosenMember: MemberData): void {
     const memberNameLabel = document.getElementById(`${chosenMember.name}`);
     if (memberNameLabel) memberNameLabel.style.color = 'red';
 
-    const homeworkLabel = document.getElementById(`${chosenMember.name}-homework-${chosenHomework}`);
+    const homeworkLabel = document.getElementById(`${chosenMember.name}-homework`);
     if (homeworkLabel) homeworkLabel.style.color = 'red';
 
     const submitButton = document.getElementById('submit-button');
