@@ -3,6 +3,4 @@ export const MEMBER_NAMES = [
     'Jordyn',
     'Kam',
     'Leo',
-    // 'Dennis',
-    // 'Zuzu'
 ] as const;

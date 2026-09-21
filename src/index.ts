@@ -1,12 +1,9 @@
-// import fs from 'fs';
 import Papa from 'papaparse';
 
 import { MEMBER_NAMES } from './constants';
 import { HomeworkRow, MemberData } from './types';
 
 async function init(): Promise<void> {
-    // TODO
-    // const homeworkFile = fs.readFileSync('homework_history.csv', 'utf-8');
     const homeworkFile = await fetch('homework_history.csv').then(r => r.text());
     const homeworkHistory = Papa.parse<HomeworkRow>(homeworkFile, {
         header: true
@@ -19,9 +16,10 @@ async function init(): Promise<void> {
         if (homeworkOptions) {
             homeworkOptions.innerHTML += `
                 <div>
-                    <div class="member-label" id="${member.name}">
-                        <span class="member-name">${member.name}</span>
-                        <span>(${(member.probability * 100).toFixed(2)}%) (${probabilityAcc}-${(probabilityAcc + member.probability * 100).toFixed(2)})</span>
+                    <div class="member-info" id="${member.name}">
+                        <div class="member-name">${member.name}</div>
+                        <div>Probability: ${(member.probability * 100).toFixed(2)}%</div>
+                        <div>Range: ${probabilityAcc.toFixed(2)}-${(probabilityAcc + member.probability * 100).toFixed(2)}</div>
                     </div>
 
                     <div class="homework-inputs">
@@ -31,7 +29,7 @@ async function init(): Promise<void> {
                 </div>
             `;
         }
-        probabilityAcc += Number((member.probability * 100).toFixed(2));
+        probabilityAcc += member.probability * 100;
     });
 
     const homeworkForm = document.getElementById('homework-form');
@@ -72,7 +70,6 @@ function calculateMemberData(homeworkHistory: HomeworkRow[]): MemberData[] {
 function decideHomework(members: MemberData[]): void {
     const chosenMember = chooseMember(members);
     updateUI(chosenMember);
-    // updateHistory();
 }
 
 function chooseMember(members: MemberData[]): MemberData {
@@ -101,7 +98,3 @@ function updateUI(chosenMember: MemberData): void {
     const submitButton = document.getElementById('submit-button');
     if (submitButton) submitButton.style.display = 'none';
 }
-
-// function updateHistory(): void {
-//     fs.appendFileSync('homework_history.csv', '\n123,Alex,Yay');
-// }

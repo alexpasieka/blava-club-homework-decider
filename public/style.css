@@ -39,7 +39,8 @@ h1 {
 }
 
 .member-label {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 #random-number-container {
