@@ -12,29 +12,23 @@ async function init(): Promise<void> {
 
     let probabilityAcc = 0;
     members.forEach(member => {
-        const homeworkOptions = document.getElementById('homework-options');
-        if (homeworkOptions) {
-            homeworkOptions.innerHTML += `
-                <div>
-                    <div class="member-info" id="${member.name}">
-                        <div class="member-name">${member.name}</div>
-                        <div>Probability: ${(member.probability * 100).toFixed(2)}%</div>
-                        <div>Range: ${probabilityAcc.toFixed(2)}-${(probabilityAcc + member.probability * 100).toFixed(2)}</div>
-                    </div>
-
-                    <div class="homework-inputs">
-                        <label id="${member.name}-homework" for="${member.name}-homework">Homework Idea:</label>
-                        <input name="${member.name}-homework" type="text">
-                    </div>
+        const details = document.getElementById('details');
+        if (details) {
+            details.innerHTML += `
+                <div class="member-info" id="${member.name}">
+                    <div class="member-name">${member.name}</div>
+                    <div>Probability: ${(member.probability * 100).toFixed(2)}%</div>
+                    <div>Range: ${probabilityAcc.toFixed(2)} - ${(probabilityAcc + member.probability * 100).toFixed(2)}</div>
+                    <label name="${member.name}-suggestion" for="${member.name}-suggestion">Suggestion:</label>
+                    <input name="${member.name}-suggestion" type="text">
                 </div>
             `;
         }
         probabilityAcc += member.probability * 100;
     });
 
-    const homeworkForm = document.getElementById('homework-form');
-    homeworkForm?.addEventListener('submit', event => {
-        event.preventDefault();
+    const submitButton = document.getElementById('submit-button');
+    submitButton?.addEventListener('click', () => {
         decideHomework(members);
     });
 }
@@ -73,10 +67,15 @@ function decideHomework(members: MemberData[]): void {
 }
 
 function chooseMember(members: MemberData[]): MemberData {
+    const memberInfos = document.querySelectorAll<HTMLElement>('.member-info');
+    memberInfos.forEach(memberInfo => {
+        memberInfo.style.color = 'white';
+    });
+
     let random = Math.random();
 
     const randomNumberLabel = document.getElementById(`random-number`);
-    if (randomNumberLabel) randomNumberLabel.innerHTML = random.toString();
+    if (randomNumberLabel) randomNumberLabel.innerHTML = `Generated Number: ${random.toFixed(2)}`;
 
     for (let i = 0; i < members.length; i++) {
         if (random < members[i].probability) {
@@ -89,12 +88,6 @@ function chooseMember(members: MemberData[]): MemberData {
 }
 
 function updateUI(chosenMember: MemberData): void {
-    const memberNameLabel = document.getElementById(`${chosenMember.name}`);
-    if (memberNameLabel) memberNameLabel.style.color = 'red';
-
-    const homeworkLabel = document.getElementById(`${chosenMember.name}-homework`);
-    if (homeworkLabel) homeworkLabel.style.color = 'red';
-
-    const submitButton = document.getElementById('submit-button');
-    if (submitButton) submitButton.style.display = 'none';
+    const memberInfo = document.getElementById(`${chosenMember.name}`);
+    if (memberInfo) memberInfo.style.color = 'red';
 }
