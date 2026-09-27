@@ -31,8 +31,8 @@ function calculateMemberData(homeworkHistory: HomeworkRow[]): MemberData[] {
             ...member,
             chosenCount,
             // If a member has never been chosen, their inverseChosenCount would equal infinity
-            // Instead, arbitrarily inflate their probability with a finite number (10)
-            inverseChosenCount: chosenCount === 0 ? 10 : 1 / chosenCount,
+            // Instead, arbitrarily inflate their probability with a finite number (0.25)
+            inverseChosenCount: chosenCount === 0 ? 0.25 : 1 / chosenCount,
             probability: 0
         }
     });
