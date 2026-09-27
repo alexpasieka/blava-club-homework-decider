@@ -1,15 +1,12 @@
-import { MEMBER_NAMES } from './constants';
-
-export type MemberName = typeof MEMBER_NAMES[number];
-
 export interface HomeworkRow {
     date: string;
-    suggester: MemberName;
+    suggester: string;
     idea: string;
 }
 
 export interface MemberData {
-    name: MemberName;
+    name: string;
+    color: string;
     chosenCount: number;
     inverseChosenCount: number;
     probability: number;

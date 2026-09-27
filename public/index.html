@@ -16,17 +16,15 @@
     <body>
         <h1>Blava Club Homework Decider</h1>
 
-        <div id="content">
-            <div id="left-panel">
-                <div id="details"></div>
-            </div>
+        <div id="legend"></div>
 
-            <div id="right-panel">
-                <div id="wheel"></div>
-                <button id="submit-button">Go!</button>
-                <div id="random-number"></div>
-            </div>
+        <div id="wheel-container">
+            <canvas id="pointer" width="50" height="50"></canvas>
+            <canvas id="wheel" width="400" height="400"></canvas>
         </div>
+
+        <button id="spin-button">Spin!</button>
+        <div id="random-number"></div>
 
         <script type="module" src="bundle.js"></script>
     </body>

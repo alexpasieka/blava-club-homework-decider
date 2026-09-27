@@ -1,52 +1,55 @@
 html {
-    color: #E8E8E8;
+    color: #919191;
     font-family: 'Roboto', sans-serif;
-    background-color: #424242;
+    background-color: #272727;
 }
 
 h1 {
     display: flex;
     justify-content: center;
-    font-size: 5em;
+    font-size: 4rem;
 }
 
-#content {
+#legend {
     display: flex;
     justify-self: center;
-    width: 50%;
-}
-
-#left-panel, #right-panel {
-    width: 50%
-}
-
-#details {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     gap: 25px;
+    margin-bottom: 50px;
+}
+
+.member-info {
+    width: 175px;
+    padding: 10px;
+    border-radius: 25px;
+    border: 1px solid transparent;
 }
 
 .member-name {
-    font-size: 3em;
+    font-size: 2rem;
+    line-height: 0.9;
+    margin-bottom: 10px;
 }
 
-#right-panel {
+#wheel-container {
+    position: relative;
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 25px;
+    margin-bottom: 25px;
+}
+
+#pointer {
+    position: absolute;
+    top: 0;
+    z-index: 999;
 }
 
 #wheel {
-    width: 250px;
-    height: 250px;
-    border-radius: 100%;
-    background-color: #000;
+    margin-top: 25px;
 }
 
-#submit-button {
+#spin-button {
+    display: flex;
+    justify-self: center;
     padding: 10px 25px;
     cursor: pointer;
     font-size: 2em;
@@ -54,4 +57,11 @@ h1 {
     border-radius: 15px;
     border: none;
     background-color: #FFF;
+    z-index: 999;
+    margin-bottom: 25px;
+}
+
+#random-number {
+    display: flex;
+    justify-self: center;
 }
