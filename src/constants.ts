@@ -1,22 +1,27 @@
 export const MEMBERS = [
     {
         name: 'Alex',
-        color: 'rgb(253, 240, 49)'
+        color: 'rgb(255, 255, 50)',
+        joinedDate: '05-16-2026'
     },
     {
         name: 'Jordyn',
-        color: 'rgb(60, 200, 255)'
+        color: 'rgb(50, 200, 255)',
+        joinedDate: '05-16-2026'
     },
     {
         name: 'Kam',
-        color: 'rgb(255, 187, 0)'
+        color: 'rgb(255, 80, 50)',
+        joinedDate: '05-16-2026'
     },
     {
         name: 'Leo',
-        color: 'rgb(255, 123, 0)'
+        color: 'rgb(255, 140, 50)',
+        joinedDate: '05-16-2026'
     },
     {
         name: 'Dennis',
-        color: 'rgb(151, 58, 228)'
+        color: 'rgb(150, 50, 255)',
+        joinedDate: '09-27-2026'
     }
 ] as const;

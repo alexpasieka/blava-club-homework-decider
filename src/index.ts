@@ -27,12 +27,14 @@ function calculateMemberData(homeworkHistory: HomeworkRow[]): MemberData[] {
         const chosenCount = homeworkHistory.reduce(
             (acc, homework) => homework.suggester === member.name ? acc + 1 : acc, 0
         );
+        const participationCount = homeworkHistory.reduce(
+            (acc, homework) => homework.date >= member.joinedDate ? acc + 1 : acc, 0
+        );
         return {
             ...member,
             chosenCount,
-            // If a member has never been chosen, their inverseChosenCount would equal infinity
-            // Instead, arbitrarily inflate their probability with a finite number (0.25)
-            inverseChosenCount: chosenCount === 0 ? 0.25 : 1 / chosenCount,
+            participationCount,
+            inverseChosenCount: (participationCount / chosenCount) || 1,
             probability: 0
         }
     });
@@ -55,7 +57,10 @@ function initLegend(members: MemberData[]): void {
             legend.innerHTML += `
                 <div class="member-info" id="${member.name}">
                     <div class="member-name" style="color: ${member.color}">${member.name}</div>
-                    <div>Probability: ${(member.probability * 100).toFixed(2)}%</div>
+                    <div>Chosen Count: ${member.chosenCount}</div>
+                    <div>Participation Count: ${member.participationCount}</div>
+                    <div>Chosen Percentage: ${(member.chosenCount / (member.participationCount || 1) * 100).toFixed(2)}%</div>
+                    <div>Weighted Probability: ${(member.probability * 100).toFixed(2)}%</div>
                     <div>Range: ${probabilityAcc.toFixed(2)} - ${(probabilityAcc + member.probability * 100).toFixed(2)}</div>
                 </div>
             `;

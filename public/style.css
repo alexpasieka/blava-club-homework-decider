@@ -20,6 +20,7 @@ h1 {
 .member-info {
     width: 175px;
     padding: 10px;
+    font-size: 0.75rem;
     border-radius: 25px;
     border: 1px solid transparent;
 }

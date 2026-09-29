@@ -8,6 +8,7 @@ export interface MemberData {
     name: string;
     color: string;
     chosenCount: number;
+    participationCount: number;
     inverseChosenCount: number;
     probability: number;
 }
