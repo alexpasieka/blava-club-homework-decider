@@ -4,53 +4,73 @@ html {
     background-color: #272727;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+}
+
 h1 {
     display: flex;
     justify-content: center;
-    font-size: 4rem;
+    align-items: flex-end;
+    height: 15%;
+    width: 100%;
+    margin: 0;
+    font-size: clamp(12px, 6vw, 50px);
 }
 
 #legend {
     display: flex;
-    justify-self: center;
-    gap: 25px;
-    margin-bottom: 50px;
-}
-
-.member-info {
-    width: 175px;
-    padding: 10px;
-    font-size: 0.75rem;
-    border-radius: 25px;
-    border: 1px solid transparent;
+    justify-content: center;
+    align-items: center;
+    gap: 2vw;
+    height: 15%;
+    width: 100%;
 }
 
 .member-name {
-    font-size: 2rem;
-    line-height: 0.9;
-    margin-bottom: 10px;
+    padding: 10px;
+    font-size: clamp(10px, 4vw, 30px);
+    border-radius: 10px;
+    border: 1px solid transparent;
 }
 
-#wheel-container {
+#wheel-parent-container {
     position: relative;
     display: flex;
     justify-content: center;
-    margin-bottom: 25px;
+    height: 55%;
+    padding: 0 25px;
 }
 
 #pointer {
     position: absolute;
-    top: 0;
+    top: -1.75vh;
+    width: clamp(10px, 10vw, 50px);
+    aspect-ratio: 1/1;
     z-index: 999;
 }
 
+#wheel-container {
+    display: flex;
+    overflow: hidden;
+}
+
 #wheel {
-    margin-top: 25px;
+    max-width: 500px;
+}
+
+#footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 20%;
 }
 
 #spin-button {
-    display: flex;
-    justify-self: center;
     padding: 10px 25px;
     cursor: pointer;
     font-size: 2em;
@@ -59,10 +79,8 @@ h1 {
     border: none;
     background-color: #FFF;
     z-index: 999;
-    margin-bottom: 25px;
 }
 
 #random-number {
-    display: flex;
-    justify-self: center;
+    color: transparent;
 }

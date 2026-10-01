@@ -18,13 +18,17 @@
 
         <div id="legend"></div>
 
-        <div id="wheel-container">
-            <canvas id="pointer" width="50" height="50"></canvas>
-            <canvas id="wheel" width="400" height="400"></canvas>
+        <div id="wheel-parent-container">
+            <canvas id="pointer"></canvas>
+            <div id="wheel-container">
+                <canvas id="wheel"></canvas>
+            </div>
         </div>
 
-        <button id="spin-button">Spin!</button>
-        <div id="random-number"></div>
+        <div id="footer">
+            <button id="spin-button">Spin!</button>
+            <div id="random-number">Placeholder</div>
+        </div>
 
         <script type="module" src="bundle.js"></script>
     </body>

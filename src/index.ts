@@ -50,45 +50,48 @@ function calculateMemberData(homeworkHistory: HomeworkRow[]): MemberData[] {
 }
 
 function initLegend(members: MemberData[]): void {
-    let probabilityAcc = 0;
     members.forEach(member => {
         const legend = document.getElementById('legend');
         if (legend) {
             legend.innerHTML += `
-                <div class="member-info" id="${member.name}">
-                    <div class="member-name" style="color: ${member.color}">${member.name}</div>
-                    <div>Chosen Count: ${member.chosenCount}</div>
-                    <div>Participation Count: ${member.participationCount}</div>
-                    <div>Chosen Percentage: ${(member.chosenCount / (member.participationCount || 1) * 100).toFixed(2)}%</div>
-                    <div>Weighted Probability: ${(member.probability * 100).toFixed(2)}%</div>
-                    <div>Range: ${probabilityAcc.toFixed(2)} - ${(probabilityAcc + member.probability * 100).toFixed(2)}</div>
-                </div>
+                <div class="member-name" id="${member.name}" style="color: ${member.color}">${member.name}</div>
             `;
         }
-        probabilityAcc += member.probability * 100;
     });
 }
 
 function initWheel(members: MemberData[]): void {
+    let probabilityAcc = 0;
     new Chart(
         document.getElementById('wheel') as HTMLCanvasElement,
         {
             type: 'pie',
             data: {
+                labels: members.map(member => {
+                    const toolTipText = 
+`${member.name}
+Chosen Count: ${member.chosenCount}
+Participation Count: ${member.participationCount}
+Chosen Percentage: ${(member.chosenCount / (member.participationCount || 1) * 100).toFixed(2)}%
+Weighted Probability: ${(member.probability * 100).toFixed(2)}%`;
+                    probabilityAcc += member.probability * 100;
+                    return toolTipText;
+                }),
                 datasets: [{
                     data: members.map(member => member.probability),
                     backgroundColor: members.map(member => member.color)
                 }],
             },
             options: {
-                responsive: false,
-                events: [],
-                animation: {
-                    animateRotate: false
-                },
                 plugins: {
                     legend: {
                         display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: () => ''
+                        },
+                        displayColors: false
                     }
                 }
             },
@@ -100,8 +103,8 @@ function initWheel(members: MemberData[]): void {
     if (ctx) {
         ctx.beginPath();
         ctx.moveTo(0, 0);
-        ctx.lineTo(25, 50);
-        ctx.lineTo(50, 0);
+        ctx.lineTo(150, 150);
+        ctx.lineTo(300, 0);
         ctx.fillStyle = '#FFF';
         ctx.fill();
     }
@@ -124,13 +127,15 @@ function decideHomework(members: MemberData[]): void {
 }
 
 function resetUI(): void {
-    const memberInfos = document.querySelectorAll<HTMLElement>('.member-info');
-    memberInfos.forEach(memberInfo => {
-        memberInfo.style.border = '1px solid transparent';
+    const memberNames = document.querySelectorAll<HTMLElement>('.member-name');
+    memberNames.forEach(memberName => {
+        memberName.style.border = '1px solid transparent';
     });
 
     const randomNumberLabel = document.getElementById(`random-number`);
-    if (randomNumberLabel) randomNumberLabel.innerHTML = "";
+    if (randomNumberLabel) {
+        randomNumberLabel.style.color = 'transparent';
+    }
 }
 
 function spinWheel(randomNumber: number): void {
@@ -169,5 +174,8 @@ function updateUI(chosenMember: MemberData, randomNumber: number): void {
     if (memberInfo) memberInfo.style.border = '1px solid white';
 
     const randomNumberLabel = document.getElementById(`random-number`);
-    if (randomNumberLabel) randomNumberLabel.innerHTML = `Generated Number: ${randomNumber.toFixed(2)}`;
+    if (randomNumberLabel) {
+        randomNumberLabel.innerHTML = `Generated Number: ${randomNumber.toFixed(2)}`;
+        randomNumberLabel.style.color = '#919191';
+    }
 }
