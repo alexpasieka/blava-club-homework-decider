@@ -28,13 +28,13 @@ function calculateMemberData(homeworkHistory: HomeworkRow[]): MemberData[] {
             (acc, homework) => homework.suggester === member.name ? acc + 1 : acc, 0
         );
         const participationCount = homeworkHistory.reduce(
-            (acc, homework) => homework.date >= member.joinedDate ? acc + 1 : acc, 0
+            (acc, homework) => new Date(homework.date) >= new Date(member.joinedDate) ? acc + 1 : acc, 0
         );
         return {
             ...member,
             chosenCount,
             participationCount,
-            inverseChosenCount: (participationCount / chosenCount) || 1,
+            inverseChosenCount: chosenCount === 0 ? 1 : (participationCount / chosenCount),
             probability: 0
         }
     });
